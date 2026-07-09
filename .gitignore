@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+*.log
+.DS_Store
+# Local OpenAPI spec inputs (not published; used only for codegen)
+packages/*/openapi.yaml
+packages/*/open-api.json
