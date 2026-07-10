@@ -1,5 +1,5 @@
 {
-  "name": "@miranum/client-clockin",
+  "name": "@miragon/client-clockin",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",

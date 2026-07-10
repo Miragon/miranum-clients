@@ -1,14 +1,14 @@
-# @miranum/client-dimacon
+# @miragon/client-dimacon
 
 Typed client for the Dimacon API. Generated from the Dimacon OpenAPI spec with
 `@hey-api/openapi-ts`.
 
 ```bash
-pnpm add @miranum/client-dimacon
+pnpm add @miragon/client-dimacon
 ```
 
 ```ts
-import { createDimaconClient, sdk } from "@miranum/client-dimacon"
+import { createDimaconClient, sdk } from "@miragon/client-dimacon"
 
 const client = createDimaconClient({
   baseUrl: process.env.DIMACON_BASE_URL!,

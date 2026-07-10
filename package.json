@@ -1,5 +1,5 @@
 {
-  "name": "@miranum/clients",
+  "name": "@miragon/clients",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.32.1",

@@ -17,7 +17,7 @@ export function createDimaconClient(options: DimaconClientOptions): Client {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      "User-Agent": "@miranum/client-dimacon/0.1.0",
+      "User-Agent": "@miragon/client-dimacon/0.1.0",
       Authorization: `Bearer ${options.apiToken}`,
       tenant: options.tenant,
     },

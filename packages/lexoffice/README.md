@@ -1,14 +1,14 @@
-# @miranum/client-lexoffice
+# @miragon/client-lexoffice
 
 Hand-written, typed client for the [lexoffice](https://www.lexoffice.de) API.
 Server-side only — uses Node's `Buffer` for multipart uploads.
 
 ```bash
-pnpm add @miranum/client-lexoffice
+pnpm add @miragon/client-lexoffice
 ```
 
 ```ts
-import { createLexofficeClient } from "@miranum/client-lexoffice"
+import { createLexofficeClient } from "@miragon/client-lexoffice"
 
 const client = createLexofficeClient({
   apiKey: process.env.LEXOFFICE_API_KEY!,

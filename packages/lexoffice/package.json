@@ -1,5 +1,5 @@
 {
-  "name": "@miranum/client-lexoffice",
+  "name": "@miragon/client-lexoffice",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",

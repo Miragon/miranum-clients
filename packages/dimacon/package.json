@@ -1,5 +1,5 @@
 {
-  "name": "@miranum/client-dimacon",
+  "name": "@miragon/client-dimacon",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
