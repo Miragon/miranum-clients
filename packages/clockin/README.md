@@ -4,7 +4,7 @@ Typed client for the [clockIn](https://clockin.de) customer API. Generated from
 the clockIn OpenAPI spec with `@hey-api/openapi-ts`.
 
 ```bash
-pnpm add @miragon/client-clockin
+npm install @miragon/client-clockin
 ```
 
 ```ts

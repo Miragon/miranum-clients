@@ -4,7 +4,7 @@ Typed client for the Dimacon API. Generated from the Dimacon OpenAPI spec with
 `@hey-api/openapi-ts`.
 
 ```bash
-pnpm add @miragon/client-dimacon
+npm install @miragon/client-dimacon
 ```
 
 ```ts

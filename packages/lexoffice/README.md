@@ -4,7 +4,7 @@ Hand-written, typed client for the [lexoffice](https://www.lexoffice.de) API.
 Server-side only — uses Node's `Buffer` for multipart uploads.
 
 ```bash
-pnpm add @miragon/client-lexoffice
+npm install @miragon/client-lexoffice
 ```
 
 ```ts

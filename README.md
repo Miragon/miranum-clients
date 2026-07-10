@@ -13,7 +13,7 @@ carrying its own copy.
 ## Usage
 
 ```bash
-pnpm add @miragon/client-clockin
+npm install @miragon/client-clockin
 ```
 
 ```ts
@@ -29,14 +29,14 @@ Each package exposes a `createXClient(config)` factory returning a configured
 
 ## Development
 
-Monorepo managed with **pnpm** (Node 22). Common tasks:
+Monorepo managed with **npm** workspaces (Node 22). Common tasks:
 
 ```bash
-pnpm install
-pnpm build          # tsup → dist/ (ESM + .d.ts) for every package
-pnpm typecheck
-pnpm lint
-pnpm format:check
+npm install
+npm run build       # tsup → dist/ (ESM + .d.ts) for every package
+npm run typecheck
+npm run lint
+npm run format:check
 ```
 
 ### Regenerating the OpenAPI clients
@@ -46,16 +46,20 @@ clockin and dimacon are generated from an OpenAPI spec that is **not** committed
 `packages/dimacon/open-api.json`) and run:
 
 ```bash
-pnpm --filter @miragon/client-clockin generate
+npm run generate -w packages/clockin
 ```
 
 ### Releasing
 
-Versioning and publishing use [Changesets](https://github.com/changesets/changesets):
+Versioning and publishing use
+[release-please](https://github.com/googleapis/release-please):
 
-1. Add a changeset with your PR: `pnpm changeset`.
-2. Merging to `main` opens a **Version Packages** PR (bumps + changelogs).
-3. Merging that PR builds and publishes the changed packages to npm.
+1. Land changes on `main` using
+   [Conventional Commits](https://www.conventionalcommits.org) (`feat:`, `fix:`,
+   `feat!:` / `BREAKING CHANGE:` …). Each package versions independently.
+2. release-please opens a **Release** PR (version bumps + changelogs). Merging it
+   tags the releases and publishes only the changed packages to npm.
 
-Requires the `@miragon` npm scope and an `NPM_TOKEN` automation token stored as a
-GitHub Actions secret.
+Publishing uses npm
+[OIDC trusted publishing](https://docs.npmjs.com/trusted-publishers) from the
+`publish-npm-package.yml` workflow — no `NPM_TOKEN` required.
