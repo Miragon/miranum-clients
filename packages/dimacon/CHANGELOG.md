@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/Miragon/miranum-clients/compare/client-dimacon-v0.2.0...client-dimacon-v0.3.0) (2026-08-19)
+
+
+### Features
+
+* **dimacon:** export generated types and zod schemas ([9fdecd8](https://github.com/Miragon/miranum-clients/commit/9fdecd8dcaca90696a7737330d0b2471ce34e9f3))
+* export generated types, zod schemas and query helpers from clockin and dimacon ([6d0eb2a](https://github.com/Miragon/miranum-clients/commit/6d0eb2ae5dc56eb168fdf60f68a67e50fce93aab))
+
 ## [0.2.0](https://github.com/Miragon/miranum-clients/compare/client-dimacon-v0.1.0...client-dimacon-v0.2.0) (2026-08-19)
 
 
