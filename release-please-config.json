@@ -4,7 +4,7 @@
   "bump-minor-pre-major": true,
   "packages": {
     "packages/clockin": { "component": "client-clockin" },
-    "packages/dimacon": { "component": "client-dimacon" },
+    "packages/dimacon": { "component": "client-dimacon", "extra-files": ["src/client.ts"] },
     "packages/lexoffice": { "component": "client-lexoffice" }
   }
 }
