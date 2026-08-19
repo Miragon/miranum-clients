@@ -26,4 +26,18 @@ export default [
       ],
     },
   },
+
+  {
+    files: ["packages/*/scripts/**/*.mjs"],
+    languageOptions: {
+      globals: {
+        console: "readonly",
+        process: "readonly",
+        URL: "readonly",
+      },
+    },
+    rules: {
+      "no-console": "off",
+    },
+  },
 ]
