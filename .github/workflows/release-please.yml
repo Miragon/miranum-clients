@@ -3,6 +3,10 @@ name: Release
 on:
   push:
     branches: [main]
+  # Recovery trigger: re-attempts the publish jobs for already-released versions
+  # (each publish skips itself if the version is on npm). Must stay in THIS file
+  # so the npm trusted publisher (workflow filename release-please.yml) matches.
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -30,7 +34,7 @@ jobs:
 
   publish-clockin:
     needs: release-please
-    if: needs.release-please.outputs.clockin == 'true'
+    if: needs.release-please.outputs.clockin == 'true' || github.event_name == 'workflow_dispatch'
     permissions:
       contents: read
       id-token: write
@@ -40,7 +44,7 @@ jobs:
 
   publish-dimacon:
     needs: release-please
-    if: needs.release-please.outputs.dimacon == 'true'
+    if: needs.release-please.outputs.dimacon == 'true' || github.event_name == 'workflow_dispatch'
     permissions:
       contents: read
       id-token: write
@@ -50,7 +54,7 @@ jobs:
 
   publish-lexoffice:
     needs: release-please
-    if: needs.release-please.outputs.lexoffice == 'true'
+    if: needs.release-please.outputs.lexoffice == 'true' || github.event_name == 'workflow_dispatch'
     permissions:
       contents: read
       id-token: write
