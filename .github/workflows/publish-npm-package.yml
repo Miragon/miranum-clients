@@ -1,5 +1,11 @@
 name: Publish npm package
 
+# npm trusted publishing (OIDC) validates the CALLING workflow's filename, not
+# this reusable workflow. The trusted publisher on npmjs.com must therefore be
+# configured with workflow filename "release-please.yml" and environment "npm"
+# for every package published here. A mismatch surfaces as a misleading E404
+# on npm publish. See https://docs.npmjs.com/trusted-publishers
+
 on:
   workflow_call:
     inputs:
