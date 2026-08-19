@@ -16,7 +16,7 @@ const client = createDimaconClient({
   apiToken: process.env.DIMACON_API_TOKEN!,
 })
 
-const jobs = await sdk.listJobs({ client })
+const jobs = await sdk.getAllJobs({ client })
 ```
 
 `createDimaconClient` returns a configured `Client` (Bearer auth, `tenant`
