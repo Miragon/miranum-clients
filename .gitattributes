@@ -1,0 +1,8 @@
+# Normalize all text files to LF in the repo and working tree so local tooling
+# (Prettier, husky shell hooks) matches the Linux CI runners on every platform.
+* text=auto eol=lf
+
+# Lockfiles and generated JSON are text; keep them LF too.
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
