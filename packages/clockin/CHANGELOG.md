@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/Miragon/miranum-clients/compare/client-clockin-v0.2.0...client-clockin-v0.3.0) (2026-09-07)
+
+
+### Features
+
+* **clockin:** regenerate client from updated clockin API spec ([#4](https://github.com/Miragon/miranum-clients/issues/4)) ([b19f18f](https://github.com/Miragon/miranum-clients/commit/b19f18f0c131e447b9e7d6d58b17b397c1a0cfad))
+
 ## [0.2.0](https://github.com/Miragon/miranum-clients/compare/client-clockin-v0.1.0...client-clockin-v0.2.0) (2026-08-19)
 
 
