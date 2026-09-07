@@ -27,7 +27,7 @@ export const zProject = z.object({
     max_hours: z.coerce.number().nullish(),
     color: z.string().nullish(),
     parent_id: z.int().nullish(),
-    projectTags: z.array(z.string()).nullish(),
+    projectTags: z.array(z.string().max(255)).nullish(),
     custom_fields: z.array(z.object({
         custom_field_id: z.int(),
         value: z.string()
@@ -739,6 +739,7 @@ export const zProjectfile = z.object({
  */
 export const zProjectfileResource = z.object({
     url: z.string().nullish(),
+    urls: z.array(z.string()).nullish(),
     title: z.string().nullish(),
     text: z.string().nullish(),
     id: z.int().nullish(),
@@ -1159,6 +1160,7 @@ export const zEmployeeResource = z.object({
     trial_period_end_date: z.string().nullish(),
     created_at: z.iso.datetime({ offset: true, local: true }).nullish(),
     updated_at: z.iso.datetime({ offset: true, local: true }).nullish(),
+    deleted_at: z.iso.datetime({ offset: true, local: true }).nullish(),
     files: z.array(zEmployeeFileResource).nullish(),
     customFields: z.array(zCustomFieldValueResource).nullish(),
     email: z.string().nullish(),
@@ -1269,6 +1271,8 @@ export const zActivityResource = z.object({
     ends_at: z.string().nullish(),
     project_id: z.int().nullish(),
     project_number: z.string().nullish(),
+    parent_project_id: z.int().nullish(),
+    parent_project_number: z.string().nullish(),
     device_id: z.int().nullish(),
     employee_id: z.int().nullish(),
     employee_personnel_number: z.string().nullish(),
@@ -2364,13 +2368,18 @@ export const zPostV3ActivitiesSearchData = z.object({
                 'byEndsAt',
                 'byEmployeeId',
                 'byProjectId',
+                'byProjectIds',
                 'byDeviceId',
                 'byEmployeePersonnelNumber',
                 'byCustomerIdentifier',
                 'byProjectNumber',
                 'byEmployeeSource'
             ]).nullish(),
-            parameters: z.array(z.union([z.string(), z.int()])).nullish()
+            parameters: z.array(z.union([
+                z.string(),
+                z.int(),
+                z.array(z.int())
+            ])).nullish()
         })).nullish()
     }).nullish(),
     path: z.never().nullish(),
