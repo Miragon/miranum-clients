@@ -910,6 +910,10 @@ export type EmployeeResource = {
    * Date in ISO 8601 format
    */
   updated_at?: string | null
+  /**
+   * Date in ISO 8601 format
+   */
+  deleted_at?: string | null
   files?: Array<EmployeeFileResource>
   /**
    * Custom field values when included
@@ -935,7 +939,14 @@ export type Projectfile = {
  * ProjectfileResource
  */
 export type ProjectfileResource = {
-  url?: string
+  /**
+   * URL of the first media file (for backward compatibility)
+   */
+  url?: string | null
+  /**
+   * All media URLs associated with this project file. Only present for notes.
+   */
+  urls?: Array<string> | null
   title?: string
   text?: string | null
   id?: number
@@ -1457,6 +1468,14 @@ export type ActivityResource = {
    * P001
    */
   project_number?: string | null
+  /**
+   * Id of the parent project when the activity is booked on a sub project
+   */
+  parent_project_id?: number | null
+  /**
+   * Number of the parent project when the activity is booked on a sub project
+   */
+  parent_project_number?: string | null
   device_id?: number | null
   employee_id?: number
   /**
@@ -1786,12 +1805,7 @@ export type SearchForProjectsData = {
     }>
     includes?: Array<{
       relation?:
-        | "employees"
-        | "subProjects"
-        | "customer"
-        | "projectTags"
-        | "signedUrl"
-        | "customFields"
+        "employees" | "subProjects" | "customer" | "projectTags" | "signedUrl" | "customFields"
     }>
   }
   path?: never
@@ -3397,6 +3411,8 @@ export type PostV3ActivitiesSearchData = {
        * * value ([int])
        * * byProjectId
        * * value ([int])
+       * * byProjectIds
+       * * value ([[int]]) - a single parameter containing an array of project ids (main and sub project ids)
        * * byDeviceId
        * * value ([int])
        * * byEmployeePersonnelNumber
@@ -3417,12 +3433,13 @@ export type PostV3ActivitiesSearchData = {
         | "byEndsAt"
         | "byEmployeeId"
         | "byProjectId"
+        | "byProjectIds"
         | "byDeviceId"
         | "byEmployeePersonnelNumber"
         | "byCustomerIdentifier"
         | "byProjectNumber"
         | "byEmployeeSource"
-      parameters?: Array<string | number>
+      parameters?: Array<string | number | Array<number>>
     }>
   }
   path?: never
