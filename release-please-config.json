@@ -5,6 +5,7 @@
   "packages": {
     "packages/clockin": { "component": "client-clockin" },
     "packages/dimacon": { "component": "client-dimacon", "extra-files": ["src/client.ts"] },
-    "packages/lexoffice": { "component": "client-lexoffice" }
+    "packages/lexoffice": { "component": "client-lexoffice" },
+    "packages/sevdesk": { "component": "client-sevdesk" }
   }
 }
