@@ -1,5 +1,6 @@
 {
   "packages/clockin": "0.3.0",
   "packages/dimacon": "0.3.0",
-  "packages/lexoffice": "0.1.0"
+  "packages/lexoffice": "0.1.0",
+  "packages/sevdesk": "0.0.0"
 }

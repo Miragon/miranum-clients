@@ -9,6 +9,7 @@ carrying its own copy.
 | [`@miragon/client-clockin`](packages/clockin)     | clockIn customer API | generated (`@hey-api/openapi-ts`)  |
 | [`@miragon/client-dimacon`](packages/dimacon)     | Dimacon API          | generated (`@hey-api/openapi-ts`)  |
 | [`@miragon/client-lexoffice`](packages/lexoffice) | lexoffice API        | hand-written (Node, uses `Buffer`) |
+| [`@miragon/client-sevdesk`](packages/sevdesk)     | sevDesk API          | hand-written                       |
 
 ## Usage
 
