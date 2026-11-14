@@ -18,4 +18,9 @@ const client = createLexofficeClient({
 
 `createLexofficeClient` returns a `Client` with `get`/`post`/`put`/`del`/
 `download`/`upload` helpers (Bearer auth, retry-on-429, 30s timeout). Uses
-`globalThis.fetch`.
+`globalThis.fetch`. A failed call throws `Lexoffice API <status>: <response body>`.
+
+```ts
+// POST /v1/files requires the upload type as a form field
+await client.upload("/v1/files", "receipt.pdf", pdf, "application/pdf", { type: "voucher" })
+```
