@@ -1,4 +1,6 @@
-const BASE_URL = "https://api.lexoffice.io"
+// Lexware moved its API gateway here on 26 May 2025 (rebranding from lexoffice) and kept
+// https://api.lexoffice.io available only until December 2025.
+const BASE_URL = "https://api.lexware.io"
 const MAX_RETRIES = 3
 const REQUEST_TIMEOUT = 30_000
 
