@@ -12,7 +12,7 @@ import { createLexofficeClient } from "@miragon/client-lexoffice"
 
 const client = createLexofficeClient({
   apiKey: process.env.LEXOFFICE_API_KEY!,
-  // baseUrl defaults to https://api.lexoffice.io
+  // baseUrl defaults to https://api.lexware.io (the gateway since May 2025)
 })
 ```
 
