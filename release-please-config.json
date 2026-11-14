@@ -6,6 +6,6 @@
     "packages/clockin": { "component": "client-clockin" },
     "packages/dimacon": { "component": "client-dimacon", "extra-files": ["src/client.ts"] },
     "packages/lexoffice": { "component": "client-lexoffice" },
-    "packages/sevdesk": { "component": "client-sevdesk" }
+    "packages/sevdesk": { "component": "client-sevdesk", "initial-version": "0.1.0" }
   }
 }
