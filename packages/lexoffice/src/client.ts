@@ -13,7 +13,31 @@ export interface Client {
   put<T>(path: string, body?: unknown): Promise<T>
   del<T>(path: string): Promise<T>
   download(path: string): Promise<{ data: Buffer; fileName: string; contentType: string }>
-  upload<T>(path: string, fileName: string, content: Buffer, mimeType?: string): Promise<T>
+  /**
+   * Multipart upload of `content` as the form field `file`. `fields` adds text
+   * fields before it: `POST /v1/files` requires `{ type: "voucher" }`.
+   */
+  upload<T>(
+    path: string,
+    fileName: string,
+    content: Buffer,
+    mimeType?: string,
+    fields?: Record<string, string>,
+  ): Promise<T>
+}
+
+/** A form field name or value must not break out of its part's header or quotes. */
+function formPart(boundary: string, name: string, value: string): string {
+  if (/["\r\n]/.test(name) || /[\r\n]/.test(value)) {
+    throw new Error(`Lexoffice upload: invalid form field ${JSON.stringify(name)}`)
+  }
+  return `--${boundary}\r\nContent-Disposition: form-data; name="${name}"\r\n\r\n${value}\r\n`
+}
+
+/** The body of a failed response, or its status text when it has none. */
+async function failure(res: Response): Promise<Error> {
+  const text = await res.text().catch(() => "")
+  return new Error(`Lexoffice API ${res.status}: ${text || res.statusText}`)
 }
 
 export function createLexofficeClient(config: LexofficeClientConfig): Client {
@@ -59,10 +83,7 @@ export function createLexofficeClient(config: LexofficeClientConfig): Client {
 
         if (res.status === 204) return undefined as T
 
-        if (!res.ok) {
-          const text = await res.text().catch(() => "")
-          throw new Error(`Lexoffice API ${res.status}: ${text || res.statusText}`)
-        }
+        if (!res.ok) throw await failure(res)
 
         return (await res.json()) as T
       } finally {
@@ -84,7 +105,8 @@ export function createLexofficeClient(config: LexofficeClientConfig): Client {
       const res = await fetch(`${baseUrl}${path}`, {
         headers: { Accept: "application/pdf", Authorization: `Bearer ${apiKey}` },
       })
-      if (!res.ok) throw new Error(`Lexoffice API ${res.status}: ${res.statusText}`)
+      // The body says why, e.g. that a draft has no document yet.
+      if (!res.ok) throw await failure(res)
       const contentType = res.headers.get("Content-Type")?.split(";")[0].trim() ?? "application/pdf"
       const disposition = res.headers.get("Content-Disposition") ?? ""
       const fileNameMatch = disposition.match(/filename="?([^";\n]+)"?/)
@@ -92,9 +114,16 @@ export function createLexofficeClient(config: LexofficeClientConfig): Client {
       return { data: Buffer.from(await res.arrayBuffer()), fileName, contentType }
     },
 
-    async upload<T>(path: string, fileName: string, content: Buffer, mimeType = "application/pdf") {
+    async upload<T>(
+      path: string,
+      fileName: string,
+      content: Buffer,
+      mimeType = "application/pdf",
+      fields: Record<string, string> = {},
+    ) {
       const boundary = `----FormBoundary${Date.now()}`
-      const header = `--${boundary}\r\nContent-Disposition: form-data; name="file"; filename="${fileName}"\r\nContent-Type: ${mimeType}\r\n\r\n`
+      const parts = Object.entries(fields).map(([name, value]) => formPart(boundary, name, value))
+      const header = `${parts.join("")}--${boundary}\r\nContent-Disposition: form-data; name="file"; filename="${fileName}"\r\nContent-Type: ${mimeType}\r\n\r\n`
       const footer = `\r\n--${boundary}--\r\n`
       const body = Buffer.concat([Buffer.from(header), content, Buffer.from(footer)])
 
@@ -106,10 +135,7 @@ export function createLexofficeClient(config: LexofficeClientConfig): Client {
         },
         body,
       })
-      if (!res.ok) {
-        const text = await res.text().catch(() => "")
-        throw new Error(`Lexoffice API ${res.status}: ${text || res.statusText}`)
-      }
+      if (!res.ok) throw await failure(res)
       if (res.status === 204) return undefined as T
       return (await res.json()) as T
     },
