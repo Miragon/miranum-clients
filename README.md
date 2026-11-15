@@ -9,7 +9,7 @@ carrying its own copy.
 | [`@miragon/client-clockin`](packages/clockin)     | clockIn customer API | generated (`@hey-api/openapi-ts`)  |
 | [`@miragon/client-dimacon`](packages/dimacon)     | Dimacon API          | generated (`@hey-api/openapi-ts`)  |
 | [`@miragon/client-lexoffice`](packages/lexoffice) | lexoffice API        | hand-written (Node, uses `Buffer`) |
-| [`@miragon/client-sevdesk`](packages/sevdesk)     | sevDesk API          | hand-written                       |
+| [`@miragon/client-sevdesk`](packages/sevdesk)     | sevDesk API          | generated (`@hey-api/openapi-ts`)  |
 
 ## Usage
 
@@ -42,9 +42,11 @@ npm run format:check
 
 ### Regenerating the OpenAPI clients
 
-clockin and dimacon are generated from an OpenAPI spec that is **not** committed
-(kept locally). Drop the spec next to the package (`packages/clockin/openapi.yaml`,
-`packages/dimacon/open-api.json`) and run:
+clockin, dimacon and sevdesk are generated from an OpenAPI spec that is **not**
+committed (kept locally). Drop the spec next to the package
+(`packages/clockin/openapi.yaml`, `packages/dimacon/open-api.json`,
+`packages/sevdesk/openapi.yaml` from
+[api.sevdesk.de/openapi.yaml](https://api.sevdesk.de/openapi.yaml)) and run:
 
 ```bash
 npm run generate -w packages/clockin

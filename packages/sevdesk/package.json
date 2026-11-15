@@ -25,9 +25,14 @@
   },
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "generate": "openapi-ts && node scripts/postprocess-zod.mjs"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@hey-api/openapi-ts": "0.94.5",
     "@types/node": "^22.10.2",
     "tsup": "^8.3.0",
     "typescript": "^5.7.2"
