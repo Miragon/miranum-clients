@@ -1,2 +1,8 @@
 export { createSevdeskClient } from "./client.js"
 export type { Client, SevdeskClientConfig } from "./client.js"
+export { SevdeskError, toSevdeskError } from "./errors.js"
+export { getNextOrderNumber } from "./endpoints.js"
+export * from "./generated/types.gen.js"
+export * from "./generated/zod.gen.js"
+export * as sdk from "./generated/sdk.gen.js"
+export * from "./types.js"
